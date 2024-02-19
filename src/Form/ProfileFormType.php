@@ -9,16 +9,20 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ProfileFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    { $user = $options['data'];
         $builder
-            ->add('photo', TextType::class, [
-                'label' => 'Photo',
-                'required' => false,
-            ])
+        ->add('photo', FileType::class, [
+            'label' => 'Photo',
+            'required' => false,
+            'data' => $user->getPhoto(),
+            'data_class' => null,
+            'mapped' => false,
+        ])
             ->add('firstname', TextType::class, [
                 'label' => 'First Name',
                 'required' => false,
