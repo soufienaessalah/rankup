@@ -1,0 +1,126 @@
+{#cette page pour l'affichage des evenements #}
+
+
+{#{% block title %}Evenement index{% endblock %}#}
+
+
+<head>
+    <title>
+        EndGam - Gaming Magazine Template
+    </title>
+    <meta charset="UTF-8">
+    <meta name="description" content="EndGam Gaming Magazine Template">
+    <meta name="keywords" content="endGam, gaming, magazine, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {# Favicon #}
+    <link href="{{ asset('img/favicon.ico') }}" rel="shortcut icon"/>
+
+    {# Google Font #}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    {# Stylesheets #}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}"/>
+    <link  rel="stylesheet" href="{{ asset('css/alone.css') }}" />
+
+    {# Main Stylesheets #}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<!-- Header section -->
+	<header class="">
+		<div class="">
+			<div class="header-social d-flex justify-content-end" style="color: black;">
+                <p style="color: black;">Follow us:</p>
+                <a href="#" style="color: black;"><i class="fa fa-pinterest" style="color: black;"></i></a>
+                <a href="#" style="color: black;"><i class="fa fa-facebook" style="color: black;"></i></a>
+                <a href="#" style="color: black;"><i class="fa fa-twitter" style="color: black;"></i></a>
+                <a href="#" style="color: black;"><i class="fa fa-dribbble" style="color: black;"></i></a>
+                <a href="#" style="color: black;"><i class="fa fa-behance" style="color: black;"></i></a>
+        </div>  
+			<div class="header-bar-warp d-flex">
+				<!-- site logo -->
+				<a href="home.html" class="site-logo">
+					<img src="./img/logo.png" alt="">
+				</a>
+				<nav class="top-nav-area w-100">
+					<div class="user-panel">
+						<a href="">Login</a> / <a href="">Register</a>
+					</div>
+					<!-- Menu -->
+					<ul class="main-menu primary-menu">
+						<li><a href="home.html">Home</a></li>
+						<li><a href="games.html">Games</a>
+							<ul class="sub-menu">
+								<li><a href="game-single.html">Game Singel</a></li>
+							</ul>
+						</li>
+						<li><a href="review.html">Reviews</a></li>
+						<li><a href="{{ path('app_evenement_index') }}">Events</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<!-- Header section end -->
+
+
+{% block body %}
+    {# {{ include('header.html.twig') }} #}
+    
+    <div class="container">
+        <h1>Our Events</h1>
+        {% if evenements is not empty %}
+            <div class="events-list">
+                {% for evenement in evenements %}
+                    <div class="event">
+                        <h2>{{ evenement.nomEvent }}</h2>
+                        {#<p><strong>ID:</strong> {{ evenement.id }}</p>#}
+                        <p><strong>Date:</strong> {{ evenement.dateDebut|date('Y-m-d') }} - {{ evenement.dateFin|date('Y-m-d') }}</p>
+                        <p><strong>Type:</strong> {{ evenement.type }}</p>
+                        <p><strong>Description:</strong> {{ evenement.description }}</p>
+                        <p class="actions">
+                            <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="show-button">Show Event</a>
+                            {# <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Edit</a> #}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No records found</p>
+        {% endif %}
+    </div>
+
+     {#<a href="{{ path('app_evenement_new') }}">Create new</a>#}
+
+    {{ include('footer.html.twig') }}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery.slicknav.min.js') }}"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('js/jquery.sticky-sidebar.min.js') }}"></script>
+<script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+

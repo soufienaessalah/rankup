@@ -1,3 +1,19 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+Evenement:
+  path: /Evenement
+  controller: 'App\Controller\EvenementController::index'
+
+Sponsor:
+  path: /Sponsor
+  controller: 'App\Controller\SponsorController::index'
+
+app_t_t_t:
+  path: /t
+  controller: 'App\Controller\TTTController::index'
+
+app back:
+  path: /back
+  controller: 'App\Controller\TTTController::index'
