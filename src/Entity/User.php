@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -18,15 +19,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message: 'Please enter an email')]
+    #[Assert\Email(message: 'The email "{{ value }}" is not a valid email.')]
     private ?string $email = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Regex(
+        pattern:"/^[a-zA-Z]+$/i",
+        message: 'Your first name can only contain letters'
+    )]
     private ?string $firstname = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Regex(
+        pattern:"/^[a-zA-Z]+$/i",
+        message: 'Your last name can only contain letters'
+    )]
     private ?string $lastname = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Please enter a username')]
+    #[Assert\Length(
+        min: 4,
+        max: 50,
+        minMessage: 'Your username must be at least {{ limit }} characters long',
+        maxMessage: 'Your username cannot be longer than {{ limit }} characters'
+    )]
     private ?string $username = null;
 
     #[ORM\Column]
@@ -39,6 +57,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $photo = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^\d{8}$/',
+        message: 'Your phone number must contain exactly 8 numbers'
+    )]
     private ?string $phone = null;
 
     #[ORM\Column(type: 'date', nullable: true)]
@@ -57,6 +79,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $bio = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Length(
+        max: 15,
+        maxMessage: 'Your summoner name cannot be longer than {{ limit }} characters'
+    )]
     private ?string $summonername = null;
 
     public function getId(): ?int
