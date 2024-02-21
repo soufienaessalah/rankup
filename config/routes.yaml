@@ -1,3 +1,15 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+reclamation:
+    path: /Reclamation
+    controller: 'App\Controller\ReclamationController::index'
+
+suivi_reclamation:
+    path: /SuiviReclamation
+    controller: 'App\Controller\SuiviReclamationController::index'
+
+t:
+    path: /t
+    controller: 'App\Controller\TTTController::index'
+
+back:  # Ensure proper alignment with other routes
+    path: /back
+    controller: 'App\Controller\BackController::index'
