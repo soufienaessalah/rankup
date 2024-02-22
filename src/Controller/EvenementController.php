@@ -22,6 +22,15 @@ class EvenementController extends AbstractController
         ]);
     }
 
+    #[Route('/affichageA', name: 'app_evenement_affichageA', methods: ['GET'])]
+public function affichageA(EvenementRepository $evenementRepository): Response
+{
+    return $this->render('evenement/affichageA.html.twig', [
+        'evenements' => $evenementRepository->findAll(),
+    ]);
+}
+
+
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -71,11 +80,11 @@ class EvenementController extends AbstractController
     #[Route('/{id}', name: 'app_evenement_delete', methods: ['POST'])]
     public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$evenement->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $evenement->getId(), $request->request->get('_token'))) {
             $entityManager->remove($evenement);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_evenement_affichageA', [], Response::HTTP_SEE_OTHER);
     }
 }

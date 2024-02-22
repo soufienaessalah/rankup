@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SponsorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SponsorRepository::class)]
@@ -21,6 +23,13 @@ class Sponsor
 
     #[ORM\Column(length: 255)]
     private ?string $mailSponsor = null;
+
+   
+
+    
+    
+   
+    
 
     public function getId(): ?int
     {
@@ -62,4 +71,11 @@ class Sponsor
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Evenement>
+     */
+
+   
+
 }

@@ -90,7 +90,7 @@
                         {#<p><strong>ID:</strong> {{ evenement.id }}</p>#}
                         <p><strong>Date:</strong> {{ evenement.dateDebut|date('Y-m-d') }} - {{ evenement.dateFin|date('Y-m-d') }}</p>
                         <p><strong>Type:</strong> {{ evenement.type }}</p>
-                        <p><strong>Description:</strong> {{ evenement.description }}</p>
+                        {#<p><strong>Description:</strong> {{ evenement.description }}</p>#}
                         <p class="actions">
                             <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="show-button">Show Event</a>
                             {# <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Edit</a> #}

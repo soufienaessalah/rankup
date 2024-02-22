@@ -1,8 +1,5 @@
-
-
-{#{% block title %}New Evenement{% endblock %}#}
-
-
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -22,18 +19,21 @@
 
         <!-- Custom styles for this template-->
         <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+        <!-- Add these links to the head section -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyVqO9lC6oNlDOU5fBAeaaqd1d60bnpjTl" crossorigin="anonymous">
+       
+
     {% endblock %}
 </head>
 
 <body id="page-top">
 
-
-
-
-
 {% block body %}
 
-    <!-- Sidebar -->
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
@@ -170,15 +170,13 @@
         </ul>
         <!-- End of Sidebar -->
 
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
+            <!-- Main Content -->
+            <div id="content">
 
-
-
-
-
-
-
-        <!-- Topbar -->
+                <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
@@ -391,6 +389,26 @@
 
 
 
+                <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <div class="card border-0 shadow-lg my-5">
+                            <div class="card-header bg-dark text-white">
+                                <h1 class="h3 mb-0">Add New Event</h1>
+                            </div>
+                            <div class="card-body">
+
+                                <!-- Your form content here -->
+                                {{ include('evenement/_form.html.twig') }}
+
+                                <!-- Back to List button -->
+                                <a href="{{ path('app_evenement_affichageA') }}" class="btn btn-secondary mt-3">Show All</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                <!-- End of Main Content -->
 
 
 
@@ -407,21 +425,69 @@
 
 
 
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="text-center my-auto">
+                        <span>My Footer Text</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
 
 
-
-
-    <h1>Add new Evenement</h1>
-
-    {{ include('evenement/_form.html.twig') }}
-
-    <a href="{{ path('app_evenement_index') }}">back to list</a>
-
-
-
-
-
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-ZVRUA1Iq07XbG4FZd+drDdT4jZalFltCZrCcGFD8PZXId9bp3tu1faXfPL5X7nxj" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyVqO9lC6oNlDOU5fBAeaaqd1d60bnpjTl" crossorigin="anonymous"></script>
 {% endblock %}
+</body>
 
-
-
+</html>
