@@ -359,7 +359,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Useres</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Users</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> EDIT</a>
                     </div>
@@ -378,18 +378,10 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Email</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
                                 <th>Username</th>
                                 <th>Roles</th>
-                                <th>Photo</th>
-                                <th>Phone</th>
-                                <th>Birthdate</th>
                                 <th>Why Blocked</th>
                                 <th>Status</th>
-                                <th>Elo</th>
-                                <th>Bio</th>
-                                <th>Summoner Name</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -398,18 +390,10 @@
 <tr>
     <td>{{ user.id }}</td>
     <td>{{ user.email }}</td>
-    <td>{{ user.firstname }}</td>
-    <td>{{ user.lastname }}</td>
     <td>{{ user.username }}</td>
     <td>{{ user.roles|join(', ') }}</td>
-    <td>{{ user.photo }}</td>
-    <td>{{ user.phone }}</td>
-    <td>{{ user.birthdate ? user.birthdate|date('Y-m-d') : '' }}</td>
     <td>{{ user.whyBlocked }}</td>
-    <td>{{ user.status ? 'Blocked' : 'Active' }}</td>
-    <td>{{ user.elo ? user.elo|join(', ') : '' }}</td>
-    <td>{{ user.bio }}</td>
-    <td>{{ user.summonername }}</td>
+    <td>{{ user.status}}</td>
     <td>
         <a  href="{{ path('adminedituser', {'id': user.id}) }}" class="btn btn-primary">Edit</a>
     </td>

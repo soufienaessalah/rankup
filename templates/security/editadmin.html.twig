@@ -359,7 +359,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Useres</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Users</h1>
              
                     </div>
 
@@ -367,31 +367,7 @@
 <div class="input1">
 
    <!-- Display first name and last name -->
-                    <div>
-                        {% if user is defined %}
-                     <dt>First Name:</dt>
-        <dd>{{ user.firstname }}</dd>
-                    <dt>Last Name:</dt>
-        <dd>{{ user.lastname }}</dd>
-                    <dt>Phone:</dt>
-        <dd>{{ user.phone }}</dd>
-                    <dt>Birthdate:</dt>
-        <dd>{{ user.birthdate ? user.birthdate|date('Y-m-d') : 'N/A' }}</dd>
 
-                   <dt>Elo:</dt>
-        <dd>{{ user.elo ? user.elo|join(', ') : 'N/A' }}</dd>
-
-                   <dt>Summoner Name:</dt>
-        <dd>{{ user.summonername }}</dd>
-                   
-        <dt>Bio:</dt>
-        <dd>{{ user.bio }}</dd>
-                        {% else %}
-                            <p>User object not defined or empty.</p>
-                        {% endif %}
-                    </div>
-
-                      </div>
 
                     <!-- Form for editing status and reason for blocking -->
                     <form method="post">
