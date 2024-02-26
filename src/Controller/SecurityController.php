@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,12 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        // Check if the user is blocked
+        $user = $this->getUser();
+        if ($user && $user->getStatus() == 'blocked') {
+            throw new CustomUserMessageAuthenticationException('Your account has been blocked.');
+        }
+
 
 
 
