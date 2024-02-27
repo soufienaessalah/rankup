@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -56,15 +57,8 @@ class RegistrationFormType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ]);
-        
+            ->add('captcha', ReCaptchaType::class);
+           
        
     }
 

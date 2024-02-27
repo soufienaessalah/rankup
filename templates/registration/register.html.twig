@@ -46,15 +46,15 @@
                         <div class="input">{{ form_widget(registrationForm.roles) }}</div>
                     </div>
                     <div class="input1">
-                        <div class="label">{{ form_label(registrationForm.agreeTerms) }}</div>
+                        
                         <div class="input">
-                            {{ form_widget(registrationForm.agreeTerms) }}
-                            <div class="text">I agree to the terms</div>
+                          
+                        <div class="input">{{ form_widget(registrationForm.captcha) }}</div>
+                         <div class="">{{ form_errors(registrationForm.captcha) }}</div> 
                         </div>
                     </div>
                 </div>
                 <div class="button input-box">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <input type="submit" value="Submit" class="btn btn-lg btn-primary">
                 </div>
                 {{ form_end(registrationForm) }}
