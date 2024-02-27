@@ -1,12 +1,28 @@
-
-
-{% block title %}Reset your password{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/stylelogin.css') }}"/>
+{% endblock %}
 
 {% block body %}
-    <h1>Reset your password</h1>
+<div class="container">
+ <div class="forms">
+        <div class="form-content">
+            <div class="login-form">
+                <div class="title">Reset Password</div>
+                {{ form_start(resetForm) }}
+                {{ form_row(resetForm.plainPassword) }}
 
-    {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
-    {{ form_end(resetForm) }}
+
+
+
+            
+                    <div class="button input-box">
+               
+                        <input type="submit" value="Reset Password" class="btn btn-lg btn-primary">
+                    </div>
+                 {{ form_end(resetForm) }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
