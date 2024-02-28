@@ -25,6 +25,8 @@
 						{% endif %}
 					</div>
 					<!-- Menu -->
+					{% if app.user %}
+					 {% if 'ROLE_PLAYER' in app.user.roles %}
 					<ul class="main-menu primary-menu">
 						<li><a href="home.html">Subscription</a></li>
 						<li><a href="games.html">Courses</a>
@@ -36,6 +38,13 @@
 						<li><a href="blog.html">Teams</a></li>
 						<li><a href="contact.html">Reclamation</a></li>
 					</ul>
+					{% elseif 'ROLE_COACH' in app.user.roles %}
+					<ul class="main-menu primary-menu">
+					<li><a href="home.html">Courses</a></li>
+					<li><a href="contact.html">Reclamation</a></li>
+					</ul>
+					{% endif %}
+					{% endif %}
 				</nav>
 			</div>
 		</div>

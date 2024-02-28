@@ -43,8 +43,13 @@
                         <div class="button input-box">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                             <input type="submit" value="Sumbit" class="btn btn-lg btn-primary">
+                            
                         </div>
                     </div>
+                    <a href="{{ path('connect_google') }}">
+    <img src="{{ asset('img/signin.PNG') }}" >
+    
+</a>
                 </form>
             </div>
         </div>

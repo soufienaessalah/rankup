@@ -55,8 +55,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\Column]
-    private ?string $password = null;
+    #[ORM\Column(nullable: true)]
+    private ?string $password = '';
 
     #[ORM\Column(nullable: true)]
     private ?string $photo = null;
@@ -160,7 +160,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPassword(): string
     {
-        return $this->password;
+        return $this->password ?? '';
     }
 
     public function setPassword(string $password): static
