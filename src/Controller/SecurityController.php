@@ -41,6 +41,15 @@ class SecurityController extends AbstractController
     public function index1(): Response
     {     $userRepository = $this->getDoctrine()->getRepository(User::class);
         $users = $userRepository->findAll();
+        return $this->render('security/back.html.twig', [
+            'controller_name' => 'SecurityController',
+                'user' => $this->getUser(),'users' => $users,
+        ]);
+    }
+    #[Route('/user', name: 'user')]
+    public function index11(): Response
+    {     $userRepository = $this->getDoctrine()->getRepository(User::class);
+        $users = $userRepository->findAll();
         return $this->render('security/admin.html.twig', [
             'controller_name' => 'SecurityController',
                 'user' => $this->getUser(),'users' => $users,
