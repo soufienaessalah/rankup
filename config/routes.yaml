@@ -13,3 +13,8 @@ t:
 back:  # Ensure proper alignment with other routes
     path: /back
     controller: 'App\Controller\BackController::index'
+
+app_suivi_reclamation_order_by_date:
+    path: '/orderByDate'
+    controller: 'App\Controller\SuiviReclamationController::orderByDate'
+    methods: ['GET']

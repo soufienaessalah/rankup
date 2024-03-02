@@ -24,6 +24,15 @@ class ReclamationRepository extends ServiceEntityRepository
     {
         return $this->findOneBy(['id' => $reclamationId]);
     }
+    public function findAllWithSuivis()
+    {
+        return $this->createQueryBuilder('r')
+            ->leftJoin('r.suiviReclamations', 's')
+            ->addSelect('s')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Reclamation[] Returns an array of Reclamation objects
 //     */
@@ -48,4 +57,9 @@ class ReclamationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+
+
 }
+

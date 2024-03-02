@@ -154,16 +154,29 @@
                     </button>
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="input-group">
+        <input id="search-input" type="text" class="form-control bg-light border-0 small" placeholder="Search..."
+            aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#search-input").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("table tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -340,19 +353,28 @@
                 <!-- End of Topbar -->
     
         <h2 class="text-center mt-5 mb-3">Rank'Up_ SuiviRECLAMATIONS</h2>
-        <a class="btn btn-outline-primary" href="{{ path('app_reclamation_index') }}">Go to Reclamation</a>
-        <a class="btn btn-outline-primary" href="{{ path('app_suivi_reclamation_new') }}">Create new</a>
+       {#  <a class="btn btn-outline-primary" href="{{ path('app_reclamation_index') }}">Go to Reclamation</a>#}
+      {#  <a class="btn btn-outline-primary" href="{{ path('app_suivi_reclamation_new') }}">Create new</a>#}
+<!-- Ajout du bouton de tri -->
+<div class="text-right mb-3">
+    <a href="{{ path('app_suivi_reclamation_order_by_date') }}" class="btn btn-primary" style="background-color: #007bff; border-color: #007bff; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold;">
+        <i class="fas fa-calendar-alt" style="margin-right: 5px;"></i> Tri </a>
+</div>
+
+
+
 
         <div class="card">
             <div class="card-body">
+             
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                           
 			    			<th class="text-center">IdRec</th>
-							<th class="text-center">ReclamationId</th>
+							
                             <th class="text-center">Status</th>
-							<th class="text-center">Reclamation</th>
+							
                             <th class="text-center">Description</th>
 
                             <th class="text-center">Date</th>
@@ -370,26 +392,11 @@
                               
 								 <td class="text-center">{{suivi_reclamation.idRec}}</td>
 
-<td class="text-center">
-    {% if suivi_reclamation.reclamation is not null %}
-        {{ suivi_reclamation.reclamation.id }}
-    {% else %}
-        Aucune réclamation associée
-    {% endif %}
-
-</td>
 
 
                                 <td class="text-center">{{suivi_reclamation.status }}</td>
 
-					<td class="text-center">
-    {% if suivi_reclamation.reclamation is not null %}
-        {{ suivi_reclamation.reclamation.description }}
-    {% else %}
-        Aucune réclamation associée
-    {% endif %}
-</td>
-
+					
 
 
                                 <td class="text-center">{{suivi_reclamation.description }}</td>
@@ -397,12 +404,33 @@
 								
 
                                 <td class="text-center">
-                                    <a class="btn btn-outline-info" href="{{ path('app_suivi_reclamation_show', {'id': suivi_reclamation.id}) }}">Show</a>
-                                    <a class="btn btn-outline-success" href="{{ path('app_suivi_reclamation_edit', {'id': suivi_reclamation.id}) }}">Edit</a>
+
+
+                                    <a class="btn btn-outline-info" href="{{ path('app_suivi_reclamation_show', {'id': suivi_reclamation.id}) }}">
+                                            <i class="fas fa-eye"></i>
+                                    </a>
+
+                                
+                                   <a class="btn btn-outline-success" href="{{ path('app_suivi_reclamation_edit', {'id': suivi_reclamation.id}) }}">
+                                             <i class="fas fa-edit"></i>
+                                    </a>
+
+
+
                                     <form method="post" action="{{ path('app_suivi_reclamation_delete', {'id': suivi_reclamation.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ suivi_reclamation.id) }}">
-                                        <button class="btn btn-outline-danger">Delete</button>
+                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ suivi_reclamation.id) }}">
+                                                 <button class="btn btn-outline-danger" type="submit">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                  </button>
                                     </form>
+                         <a href="{{ path('generate_pdf', { 'id': suivi_reclamation.id }) }}" class="btn btn-primary">
+                                 <i class="fas fa-file-pdf"></i> 
+                        </a>
+
+
+
+
+
                                 </td>
 								
 							
@@ -412,7 +440,7 @@
                             </tr>
                             
                         {% endfor %}
-
+ {{ knp_pagination_render(suivi_reclamations) }}
 
             
 
@@ -423,11 +451,15 @@
     </div>
 
     <style>
-        .table td,
-        .table th {
-            padding: 10px; /* ajustez la valeur selon vos besoins */
-        }
-    </style>
+    .table td,
+    .table th {
+        padding: 5px; /* Réduire l'espacement à l'intérieur des cellules */
+    }
+
+    .table th {
+        font-size: 14px; /* Réduire la taille de la police des en-têtes de colonne */
+    }
+</style>
      <!-- End of Main Content -->
             <!-- Footer -->
             <footer class="sticky-footer bg-white">

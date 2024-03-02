@@ -32,7 +32,7 @@ class SuiviReclamation
 
      #[Assert\Choice(
                         choices: ["reçue", "en attente", "en cours de traitement", "traité"],
-                        message: "Invalid type. Allowed types are coachs, game, site, leçon"
+                        message: "Invalid type. Allowed types are reçue,en attente, en cours de traitement,traité"
      )]
     private ?string $status = null;
 

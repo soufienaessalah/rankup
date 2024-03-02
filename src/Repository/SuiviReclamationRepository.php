@@ -45,4 +45,19 @@ class SuiviReclamationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+ /**
+     * @return SuiviReclamation[] Returns an array of SuiviReclamation objects ordered by date
+     */
+
+public function orderByDate()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+
 }

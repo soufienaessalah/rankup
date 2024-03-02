@@ -16,13 +16,7 @@ class SuiviReclamationType extends AbstractType
             ->add('status')
             ->add('description')
             ->add('date')
-            ->add('reclamation', EntityType::class, [
-                'class' => Reclamation::class,
-                'choice_label' => function ($reclamation) {
-                    return $reclamation->getId() . ' - ' . $reclamation->getDescription();
-                },
-                'placeholder' => 'Sélectionnez une réclamation',
-            ]);
+           
         ;
     }
 

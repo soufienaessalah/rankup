@@ -23,32 +23,48 @@
 	<!-- Page top end-->
 
 <section class="contact-page">
-
-     <div class="container">
-    
-        <h2 class="text-center mt-5 mb-3"><span style="color: white; text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); font-weight: bold;">Show Reclamation</span></h2>
-
-        <div class="card">
-            <div class="card-header">
-               {# <a class="btn btn-outline-info float-right" href="{{ path('app_reclamation_index') }}"> 
-                    View All Reclamations
-                </a>#}
-                 <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
-
-                 {{ include('reclamation/_delete_form.html.twig') }}
+<div class="container">
+    <div class="card mt-5" style="border-radius: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div class="card-header bg-purple text-mauve" style="border-radius: 15px 15px 0 0;">
+            <h2 class="text-center mb-0">Show Reclamation</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <b>Type:</b>
+                    <p>{{ reclamation.type }}</p>
+                </div>
+                <div class="col-md-6">
+                    <b>Date:</b>
+                    <p>{{ reclamation.date ? reclamation.date|date('Y-m-d H:i:s') : '' }}</p>
+                </div>
             </div>
-            <div class="card-body">
-                <b class="text-muted">type:</b>
-                <p>{{ reclamation.type }}</p>
-                <b class="text-muted">Description:</b>
-                <p>{{ reclamation.description }}</p>
-                <b class="text-muted">Date :</b>
-                <p>{{ reclamation.date ? reclamation.date|date('Y-m-d H:i:s') : '' }}</p>
-                
+            <hr>
+            <b>Description:</b>
+            <p>{{ reclamation.description }}</p>
+            {% if reclamation.suiviReclamations is not empty %}
+            <hr>
+            <b>Suivi de Réclamation:</b>
+            <ul>
+                {% for suiviReclamation in reclamation.suiviReclamations %}
+                <li>{{ suiviReclamation.status }}</li>
+                {# Ajoutez d'autres détails du suivi de réclamation si nécessaire #}
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Votre réclamation est bien reçue.</p>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <div class="float-right">
+                <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-sm btn-info mr-2" style="background-color: #6A5ACD; border-color: #6A5ACD;"><i class="bi bi-pencil-fill"></i> Edit</a>
+                {{ include('reclamation/_delete_form.html.twig') }}
             </div>
         </div>
     </div>
-    
+</div>
+
+
 
                 <div class="col-lg-5 order-1 order-lg-2 contact-text text-white">
 					<h3>Rule the Game!</h3>

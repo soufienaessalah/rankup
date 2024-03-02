@@ -13,16 +13,32 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Knp\Component\Pager\PaginatorInterface;
+
+
+
+
+
 
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
 {
     #[Route('/', name: 'app_reclamation_index', methods: ['GET'])]
-    public function index(ReclamationRepository $reclamationRepository): Response
+    public function index(ReclamationRepository $reclamationRepository , Request $request, PaginatorInterface $paginator): Response
     {
-        return $this->render('reclamation/index.html.twig', [
-            'reclamations' => $reclamationRepository->findAll(),
-        ]);
+      // Récupérer toutes les réclamations avec leurs suivis associés
+    $reclamations = $reclamationRepository->findAllWithSuivis();
+
+    // Paginer les réclamations
+    $reclamations = $paginator->paginate(
+        $reclamations, // Requête à paginer
+        $request->query->getInt('page', 1), // Numéro de la page
+        5 // Nombre d'éléments par page
+    );
+
+    return $this->render('reclamation/index.html.twig', [
+        'reclamations' => $reclamations,
+    ]);
     }
 
     #[Route('/new', name: 'app_reclamation_new', methods: ['GET', 'POST'])]

@@ -2,73 +2,61 @@
 
 {% block title %}New Reclamation{% endblock %}
 
-
 {% block body %}
-
- {{include ('header.html.twig')}}
-
-           
+    {{ include ('header.html.twig') }}
 
     <!-- Page top section -->
-	<section class="page-top-section set-bg" data-setbg="img/page-top-bg/4.jpg">
-		<div class="page-info">
-			<h2 style="color:  #e75480;">Contact</h2>
-			<div class="site-breadcrumb">
-				<a href="/t" style="color: blue;">Home</a>  /
-				<span>Contact</span>
-			</div>
-		</div>
-	</section>
-	<!-- Page top end-->
-
-
-
-<section class="contact-page">
-<div class="container">
-        <h2 class="text-center mt-5 mb-3" style="color: white; text-shadow: 0 0 5px white;">Create Reclamation</h2>
-<h2</h2>
-       <div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14376.077865872314!2d-73.879277264103!3d40.757667781624285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1546528920522" style="border:0" allowfullscreen></iframe></div> 
-        <div class="row">
-        <div class="col-lg-7 order-2 order-lg-1">
-            <div class="card-header">
-              
-                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-            {{ include('reclamation/_form.html.twig') }}
-            {{ form_end(form) }}
-
+    <section class="page-top-section set-bg" data-setbg="{{asset('./img/page-top-bg/4.jpg')}}">
+	
+        <div class="page-info">
+            <h2 style="color: #e75480;">Contact</h2>
+            <div class="site-breadcrumb">
+                <a href="/t" style="color: blue;">Home</a> /
+                <span>Contact</span>
             </div>
-		
+        </div>
+    </section>
+    <!-- Page top end-->
 
-            
+    <section class="contact-page">
+        <div class="container">
+            <h2 class="text-center mt-5 mb-3" style="color: white; text-shadow: 0 0 5px white;">Create Reclamation</h2>
+
+			<h3</h3>
+       <div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14376.077865872314!2d-73.879277264103!3d40.757667781624285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1546528920522" style="border:0" allowfullscreen></iframe></div> 
+            <div class="row">
+
+
+               <div class="col-lg-7 order-2 order-lg-1">
+    <div class="card-header" style="font-family: Arial, sans-serif; font-size: 16px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);color: #ffffff;;">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ include('reclamation/_form.html.twig') }}
+        {{ form_end(form) }}
     </div>
-                <div class="col-lg-5 order-1 order-lg-2 contact-text text-white">
-					<h3>Rule the Game!</h3>
-					<p>Rank Up n'est pas simplement un site, c'est une passerelle vers l'excellence dans le monde de l'e-sport. Grâce à notre expertise en coaching, vous avez maintenant la clé pour élever votre jeu, escalader les rangs et atteindre de nouveaux sommets. </p>
-					<div class="cont-info">
-						<div class="ci-icon"><img src="public/img/icons/location.png" alt=""></div>
-						<div class="ci-text">Ariana, El Ghazela, TUNISIA</div>
-					</div>
-					<div class="cont-info">
-						<div class="ci-icon"><img src="public/img/icons/phone.png" alt=""></div>
-						<div class="ci-text">+216 25576 825</div>
-					</div>
-					<div class="cont-info">
-						<div class="ci-icon"><img src="img/icons/mail.png" alt=""></div>
-						<div class="ci-text">Ran'UP@contact.com</div>
-                      
-					</div>
-                    
-				</div>
-					<a href="#" class="footer-logo">
-				<img src="./img/logo.png" alt="">
-			</a>
-		</div>
-
-      {{include ('footer.html.twig')}}
-	</div>	
-
 </div>
 
 
-
+                <div class="col-lg-5 order-1 order-lg-2 contact-text text-white">
+                    <h3>Rule the Game!</h3>
+                    <p>Rank Up n'est pas simplement un site, c'est une passerelle vers l'excellence dans le monde de l'e-sport. Grâce à notre expertise en coaching, vous avez maintenant la clé pour élever votre jeu, escalader les rangs et atteindre de nouveaux sommets. </p>
+                    <div class="cont-info">
+                        <div class="ci-icon"><img src="public/img/icons/location.png" alt=""></div>
+                        <div class="ci-text">Ariana, El Ghazela, TUNISIA</div>
+                    </div>
+                    <div class="cont-info">
+                        <div class="ci-icon"><img src="public/img/icons/phone.png" alt=""></div>
+                        <div class="ci-text">+216 25576 825</div>
+                    </div>
+                    <div class="cont-info">
+                        <div class="ci-icon"><img src="img/icons/mail.png" alt=""></div>
+                        <div class="ci-text">Ran'UP@contact.com</div>
+                    </div>
+                    <a href="#" class="footer-logo">
+                        <img src="./img/logo.png" alt="">
+                    </a>
+                </div>
+            </div>
+            {{ include ('footer.html.twig') }}
+        </div>
+    </section>
 {% endblock %}

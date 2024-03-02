@@ -15,6 +15,18 @@
                 <p>{{ reclamation.description }}</p>
                 <b class="text-muted">Date :</b>
                 <p>{{ reclamation.date ? reclamation.date|date('Y-m-d H:i:s') : '' }}</p>
+
+                 {% if reclamation.suiviReclamations is not empty %}
+                <b class="text-muted">Suivi de Réclamation:</b>
+                <ul>
+                    {% for suiviReclamation in reclamation.suiviReclamations %}
+                        <li>{{ suiviReclamation.status }}</li>
+                        {# Ajoutez d'autres détails du suivi de réclamation si nécessaire #}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>votre reclamation est bien reçue.</p>
+            {% endif %}
             </div>
         </div>
     </div>
