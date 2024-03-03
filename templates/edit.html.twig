@@ -81,22 +81,26 @@
                     <h4 class="text-right">Edit Profile</h4>
                 </div>
                 <div class="row mt-2">
-                {{ form_start(form) }}
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                 <dt>Photo:</dt>
                 <div class="">{{ form_widget(form.photo) }}
                  </div>
                     <dt>First Name:</dt>
        <div class="">{{ form_widget(form.firstname) }}</div>
+       <div class="">{{ form_errors(form.firstname) }}</div>
        <dt>Last Name:</dt>
        <div class="">{{ form_widget(form.lastname) }}</div>
+       <div class="">{{ form_errors(form.lastname) }}</div>
                     <dt>Phone:</dt>
                     <div class="">{{ form_widget(form.phone) }}</div>
+                    <div class="">{{ form_errors(form.phone) }}</div> 
                     <dt>Birthdate:</dt>
                     <div class="">{{ form_widget(form.birthdate)  }}</div>
                    <dt>Elo:</dt>
                   <div class="">{{ form_widget(form.elo)  }}</div> 
                    <dt>Summoner Name:</dt>
-                   <div class="">{{ form_widget(form.summonername)  }}</div>                   
+                   <div class="">{{ form_widget(form.summonername)  }}</div>  
+                   <div class="">{{ form_errors(form.summonername) }}</div>                  
         <dt>Bio:</dt>
         <div class="">{{ form_widget(form.bio)  }}</div> 
        

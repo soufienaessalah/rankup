@@ -1,5 +1,6 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/stylelogin.css') }}"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 {% endblock %}
 
@@ -18,44 +19,51 @@
         <div class="form-content">
             <div class="login-form">
                 <div class="title">Sign Up</div>
-                {{ form_errors(registrationForm) }}
-                {{ form_start(registrationForm) }}
+                {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
                 <div class="input-boxes">
                     <div class="input-box">
                         
                         <div class="input">{{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Enter your email'}}) }}</div>
-                        
+                        <div class="">{{ form_errors(registrationForm.email) }}</div> 
                     </div>
                        <div class="input-box">
                        
                         <div class="input">{{ form_widget(registrationForm.username, {'attr': {'placeholder': 'Enter your username'}}) }}</div>
-                            
+                            <div class="">{{ form_errors(registrationForm.username) }}</div> 
                     </div>
                       <div class="input-box">
                         
                         <div class="input">{{ form_widget(registrationForm.plainPassword.first,{'attr': {'placeholder': 'Enter your password'}}) }}</div>
+                        <div class="">{{ form_errors(registrationForm.plainPassword.first) }}</div> 
+                        
                     </div>
                     <div class="input-box">
                         
                         <div class="input">{{ form_widget(registrationForm.plainPassword.second,{'attr': {'placeholder': 'Confirm your password'}}) }}</div>
+                        <div class="">{{ form_errors(registrationForm.plainPassword.second) }}</div> 
                     </div>
                     <div class="input1">
                        <div class="label">{{ form_label(registrationForm.roles) }}</div>
                         <div class="input">{{ form_widget(registrationForm.roles) }}</div>
                     </div>
                     <div class="input1">
-                        <div class="label">{{ form_label(registrationForm.agreeTerms) }}</div>
+                        
                         <div class="input">
-                            {{ form_widget(registrationForm.agreeTerms) }}
-                            <div class="text">I agree to the terms</div>
+                          
+                        <div class="input">{{ form_widget(registrationForm.captcha) }}</div>
+                         <div class="">{{ form_errors(registrationForm.captcha) }}</div> 
                         </div>
                     </div>
                 </div>
+                 
                 <div class="button input-box">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <input type="submit" value="Submit" class="btn btn-lg btn-primary">
                 </div>
                 {{ form_end(registrationForm) }}
+                <a href="{{ path('connect_google') }}">
+    <img src="{{ asset('img/g.jpg') }}" >
+    
+</a>
             </div>
         </div>
     </div>

@@ -39,12 +39,17 @@
                             <i class="fas fa-lock"></i>
                             <input type="password" name="password" placeholder="Enter your password" class="form-control" autocomplete="current-password" required>
                         </div>
-                        <div class="text"><a href="#">Forgot password?</a></div>
+                        <div class="text"><a href="{{ path('app_forgot_password_request') }}">Forgot password?</a></div>
                         <div class="button input-box">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                            <input type="submit" value="Sumbit" class="btn btn-lg btn-primary">
+                            <input type="submit" value="Log In" class="btn btn-lg btn-primary">
+                            
                         </div>
                     </div>
+                    <a href="{{ path('connect_google') }}">
+    <img src="{{ asset('img/signin.PNG') }}" >
+    
+</a>
                 </form>
             </div>
         </div>
