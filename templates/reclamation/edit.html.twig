@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Reclamation{% endblock %}
+
+{% block body %}
+
+
+
+
+{{include ('header.html.twig')}}
+
+           
+
+    <!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2 style="color:  #e75480;">Contact</h2>
+			<div class="site-breadcrumb">
+				<a href="/t" style="color: blue;">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+	</section>
+	<!-- Page top end-->
+
+<section class="contact-page">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Edit Reclamation</h1>
+            </div>
+            <div class="card-body">
+                {{ include('reclamation/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
+           {# <div class="card-footer">
+                <a href="{{ path('app_reclamation_index') }}" class="btn btn-secondary">Back to List</a>
+            </div>#}
+        </div>
+        <div class="card mt-3">
+            <div class="card-header">
+                <h2 class="card-title">Delete Reclamation</h2>
+            </div>
+            <div class="card-body">
+                {{ include('reclamation/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+
+
+
+    
+                <div class="col-lg-5 order-1 order-lg-2 contact-text text-white">
+					<h3>Rule the Game!</h3>
+					<p>Rank Up n'est pas simplement un site, c'est une passerelle vers l'excellence dans le monde de l'e-sport. Grâce à notre expertise en coaching, vous avez maintenant la clé pour élever votre jeu, escalader les rangs et atteindre de nouveaux sommets. </p>
+					<div class="cont-info">
+						<div class="ci-icon"><img src="public/img/icons/location.png" alt=""></div>
+						<div class="ci-text">Ariana, El Ghazela, TUNISIA</div>
+					</div>
+					<div class="cont-info">
+						<div class="ci-icon"><img src="public/img/icons/phone.png" alt=""></div>
+						<div class="ci-text">+216 25576 825</div>
+					</div>
+					<div class="cont-info">
+						<div class="ci-icon"><img src="img/icons/mail.png" alt=""></div>
+						<div class="ci-text">Ran'UP@contact.com</div>
+                      
+					</div>
+                     
+				</div>
+
+      {{include ('footer.html.twig')}}
+
+      </div>
+      
+{% endblock %}
