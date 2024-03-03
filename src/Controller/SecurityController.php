@@ -10,6 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
@@ -91,4 +92,16 @@ class SecurityController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-}
+    #[Route('/user/{id}/show', name: 'adminviewuser')]
+    public function view(Request $request, $id): Response 
+    {
+        $userRepository = $this->getDoctrine()->getRepository(User::class);
+        $user = $userRepository->find($id); // Replace $userRepository with your actual repository
+    
+        return $this->render('security/moredetails.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    }
+
