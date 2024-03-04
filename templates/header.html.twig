@@ -18,27 +18,22 @@
 					<div class="user-panel">
 						<a href="">Login</a> / <a href="">Register</a>
 					</div>
+				
+
 					<!-- Menu -->
-					{% if app.user %}
-					 {% if 'ROLE_PLAYER' in app.user.roles %}
 					<ul class="main-menu primary-menu">
 						<li><a href="home.html">Home</a></li>
-						<li><a href="games.html">Games</a>
+						<li>
+    <a href="{{ path('all_lecons') }}">Toutes les Leçons</a>
+</li>
 							<ul class="sub-menu">
 								<li><a href="game-single.html">Game Singel</a></li>
 							</ul>
 						</li>
 						<li><a href="review.html">Reviews</a></li>
 						<li><a href="blog.html">News</a></li>
-						<li><a href="{{ path('app_reclamation_new') }}">Contact</a></li>
+						<li><a href="contact.html">Contact</a></li>
 					</ul>
-					{% elseif 'ROLE_COACH' in app.user.roles %}
-					<ul class="main-menu primary-menu">
-					<li><a href="home.html">Courses</a></li>
-					<li><a href="contact.html">Reclamation</a></li>
-					</ul>
-					{% endif %}
-					{% endif %}
 				</nav>
 			</div>
 		</div>
