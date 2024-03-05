@@ -181,19 +181,11 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
+<!-- Topbar Search -->
+                   
 
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -406,6 +398,10 @@
 }
 
 </style>
+<div class="search-container">
+        <label for="search-input" class="sr-only">Search Plans</label>
+        <input id="search-input" class="form-control" type="text" placeholder="Search Events..." style="width: 30%; padding: 10px; margin:13px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+    </div>
 
     <h1>SubscriptionPlan index</h1>
 
@@ -415,6 +411,7 @@
                 <h2>Plan: {{ subscription_plan.id }}</h2>
                 <p>Type: {{ subscription_plan.Type }}</p>
                 <p>Price: {{ subscription_plan.Prix }}</p>
+                <p>additionalInfo: {{ subscription_plan.additionalInfo }}</p>
                 <div class="actions">
                    <a href="{{ path('app_subscription_plan_show', {'id': subscription_plan.id}) }}" class="btn btn-primary">Show</a>
                    <a href="{{ path('app_subscription_plan_edit', {'id': subscription_plan.id}) }}" class="btn btn-primary">Edit</a>
@@ -486,7 +483,27 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+    
 {% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Ensure jQuery is included before this script -->
+
+<script>
+    $(document).ready(function() {
+        $("#search-input").on("input", function() {
+            var value = $(this).val().toLowerCase();
+            $(".plan-box").each(function() {
+                var planType = $(this).find("h2").text().toLowerCase();
+                if (planType.includes(value)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

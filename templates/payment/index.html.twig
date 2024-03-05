@@ -1,9 +1,6 @@
 
-
 <head>
-    <title>
-        EndGam - Gaming Magazine Template
-    </title>
+    <title>Subscription Plans</title>
     <meta charset="UTF-8">
     <meta name="description" content="EndGam Gaming Magazine Template">
     <meta name="keywords" content="endGam, gaming, magazine, html">
@@ -29,7 +26,11 @@
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+        
     <![endif]-->
+    
+
 </head>
 
 
@@ -71,77 +72,46 @@
 				</nav>
 			</div>
 		</div>
+
+
+        
 	</header>
 	<!-- Header section end -->
 
 
-
-
-
 {% block body %}
-  
-<style>
-
-.title {
-    text-align: center;
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-.table {
-    margin: 0 auto;
-    width: 100%;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-}
 
 
+    <h1>Make Payment</h1>
+   <div>
+        <h2>Payment Form</h2>
 
+  <div class="plans-container">
+        {% for plan in subscriptionPlans %}
+            <div class="subscription-plan">
+                <h2>{{ plan.getType() }}</h2>
+                <p><strong>Price:</strong> ${{ plan.getPrix() }}</p>
+                <p>{{ plan.getAdditionalInfo() }}</p>
+                <a href="{{ path('app_choose_subscription_details', {'id': plan.getId()}) }}" class="btn btn-purple">Select Plan</a>
+            </div>
+        {% endfor %}
+    </div>
 
-</style>
+        <form action="{{ path('app_payment_process') }}" method="POST">
+            <!-- Payment form fields go here -->
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" required>
 
-<div class="container">
-    <h1 class="title">Reservation Details</h1>
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="text" id="expiryDate" name="expiryDate" required>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th style="text-align: left;">Id</th>
-                <td>{{ reservation.id }}</td>
-            </tr>
-            <tr>
-                <th style="text-align: left;">Date</th>
-                <td>{{ reservation.Date ? reservation.Date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th style="text-align: left;">Description</th>
-                <td>{{ reservation.Description }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required>
 
-     
-</div>
-
-    <a href="{{ path('app_reservation_index') }}">back to list</a></br>
-
-    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
-
-    {{ include('reservation/_delete_form.html.twig') }}
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
 
     {{include ('footer.html.twig')}}
+
 {% endblock %}

@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
 #[Route('/subscription/plan')]
 class SubscriptionPlanController extends AbstractController
 {
@@ -78,4 +80,9 @@ class SubscriptionPlanController extends AbstractController
 
         return $this->redirectToRoute('app_subscription_plan_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+  
+
+
 }

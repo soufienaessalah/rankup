@@ -21,6 +21,11 @@ class Reservation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Description = null;
 
+     
+     #[ORM\ManyToOne(targetEntity:SubscriptionPlan::class)]
+     #[ORM\JoinColumn(nullable: false)]     
+    private ?SubscriptionPlan $subscriptionPlan = null;
+
     public function getId(): ?int
     {
         return $this->id;

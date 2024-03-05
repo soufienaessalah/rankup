@@ -3,3 +3,13 @@
   #  controller: App\Controller\DefaultController::index
 
 
+generate_pdf:
+    path: /subscription/plan/{id}/generate-pdf
+    controller: App\Controller\ChooseSubscriptionController::generatePdf
+    methods: GET
+
+
+app_payment_process:
+    path: /payment/process
+    controller: App\Controller\PaymentController::process
+    methods: [POST]

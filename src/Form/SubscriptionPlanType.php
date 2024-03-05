@@ -6,6 +6,7 @@ use App\Entity\SubscriptionPlan;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class SubscriptionPlanType extends AbstractType
 {
@@ -14,6 +15,9 @@ class SubscriptionPlanType extends AbstractType
         $builder
             ->add('Type')
             ->add('Prix')
+            ->add('additionalInfo', TextType::class, [
+                'required' => false, // Adjust as needed
+            ])
         ;
     }
 

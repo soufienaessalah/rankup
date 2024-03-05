@@ -1,9 +1,5 @@
-
-
 <head>
-    <title>
-        EndGam - Gaming Magazine Template
-    </title>
+    <title>Subscription Plans</title>
     <meta charset="UTF-8">
     <meta name="description" content="EndGam Gaming Magazine Template">
     <meta name="keywords" content="endGam, gaming, magazine, html">
@@ -63,8 +59,8 @@
 						<li><a href="review.html">Reviews</a></li>
 						<li><a href="">Events</a></li>
 						<li><a href="contact.html">Contact</a></li>
-						<li><a href="{{path('app_choose_subscription')}}">Subscription</a></li>
-                        <li><a href="{{path('app_reservation_new')}}">Reservation</a></li>
+                        <li><a href="{{path('app_choose_subscription')}}">Subscription</a></li>
+						<li><a href="{{path('app_reservation_new')}}">Reservation</a></li>
                         
 
 					</ul>
@@ -75,73 +71,56 @@
 	<!-- Header section end -->
 
 
-
-
-
 {% block body %}
-  
+
 <style>
 
-.title {
-    text-align: center;
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-.table {
-    margin: 0 auto;
-    width: 100%;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-}
-
-
-
+ .title {
+            text-align: center;
+            font-size: 20px; /* Smaller font size */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #333; /* Optional: Adjust color if needed */
+        }
 
 </style>
 
-<div class="container">
-    <h1 class="title">Reservation Details</h1>
+<div style="max-width: 600px; margin: 20 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
+    <h1 class="title" style="text-align: center;">Subscription Plan Details</h1>
 
-    <table class="table">
+    <table class="table" style="margin: 0 auto;">
         <tbody>
             <tr>
                 <th style="text-align: left;">Id</th>
-                <td>{{ reservation.id }}</td>
+                <td>{{ subscription_plan.id }}</td>
             </tr>
             <tr>
-                <th style="text-align: left;">Date</th>
-                <td>{{ reservation.Date ? reservation.Date|date('Y-m-d') : '' }}</td>
+                <th style="text-align: left;">Type</th>
+                <td>{{ subscription_plan.Type }}</td>
             </tr>
             <tr>
-                <th style="text-align: left;">Description</th>
-                <td>{{ reservation.Description }}</td>
+                <th style="text-align: left;">Prix</th>
+                <td>{{ subscription_plan.Prix }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: left;">Additional Info</th>
+                <td>{{ subscription_plan.additionalInfo }}</td>
             </tr>
         </tbody>
     </table>
-
-     
 </div>
 
-    <a href="{{ path('app_reservation_index') }}">back to list</a></br>
+ 
 
-    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
 
-    {{ include('reservation/_delete_form.html.twig') }}
+    <a href="{{ path('app_choose_subscription') }}">back to list</a> </br>
+    <a href="{{ path('generate_pdf', {'id': subscription_plan.id}) }}">Generate PDF</a></br>
 
-    {{include ('footer.html.twig')}}
+
+<a href="{{ path('app_payment')}}"> pay for subscription</a>
+
+
+    
+
+{{include ('footer.html.twig')}}
 {% endblock %}
