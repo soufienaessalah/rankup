@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class EvenementType extends AbstractType
 {
@@ -32,7 +33,11 @@ class EvenementType extends AbstractType
             ])
             ->add('dateFin')
             ->add('type')
-            ->add('description');
+            ->add('description')
+            ->add('image', FileType::class, [
+                'label' => 'Event Image',
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -42,4 +47,3 @@ class EvenementType extends AbstractType
         ]);
     }
 }
-

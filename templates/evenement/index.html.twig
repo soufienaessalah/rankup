@@ -12,6 +12,9 @@
     <meta name="description" content="EndGam Gaming Magazine Template">
     <meta name="keywords" content="endGam, gaming, magazine, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+
 
     {# Favicon #}
     <link href="{{ asset('img/favicon.ico') }}" rel="shortcut icon"/>
@@ -79,6 +82,13 @@
 
 {% block body %}
     {# {{ include('header.html.twig') }} #}
+    <div class="search-container">
+        <label for="search-input" class="sr-only">Search Events</label>
+        <input id="search-input" class="form-control" type="text" placeholder="Search Events..." style="width: 30%; padding: 10px; margin:13px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+    </div>
+
+    <title>AJAX Search Example</title>
+      
     
     <div class="container">
         <h1>Our Events</h1>
@@ -91,6 +101,13 @@
                         <p><strong>Date:</strong> {{ evenement.dateDebut|date('Y-m-d') }} - {{ evenement.dateFin|date('Y-m-d') }}</p>
                         <p><strong>Type:</strong> {{ evenement.type }}</p>
                         {#<p><strong>Description:</strong> {{ evenement.description }}</p>#}
+
+                        {% if evenement.image %}
+                            <img src="{{ evenement.image }}" alt="{{ evenement.nomEvent }}">
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif %}
+
                         <p class="actions">
                             <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="show-button">Show Event</a>
                             {# <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Edit</a> #}
@@ -102,12 +119,22 @@
             <p>No records found</p>
         {% endif %}
     </div>
+    <a href="{{ path('indewmain') }}" class="btn btn-info">calendar</a>
 
      {#<a href="{{ path('app_evenement_new') }}">Create new</a>#}
+    <div class="d-flex justify-content-center">
+        {% do evenements.setPageRange(3) %}
+        {{ knp_pagination_render(evenements, 'pagination.html.twig') }}
+    </div>
+
+    {# Link to the mini-calendar page #}
+    {#<a href="{{ path('mini_calendar') }}">Go to Mini Calendar</a>#}
+
+     
 
     {{ include('footer.html.twig') }}
 {% endblock %}
-
+ 
 
 
 
@@ -123,4 +150,13 @@
 <script src="{{ asset('js/jquery.sticky-sidebar.min.js') }}"></script>
 <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
-
+<script >
+        $(document).ready(function() {
+            $("#search-input").on("input", function() {
+                var value = $(this).val().toLowerCase();
+                $(".event").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+</script>

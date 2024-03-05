@@ -17,3 +17,8 @@ app_t_t_t:
 app back:
   path: /back
   controller: 'App\Controller\TTTController::index'
+
+generate_pdf:
+  path: /evenement/plan/{id}/generate-pdf
+  controller: App\Controller\EvenementController::generatePdf
+  methods: GET

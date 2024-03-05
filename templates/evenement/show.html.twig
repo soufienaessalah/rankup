@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}"/>
-    <link  rel="stylesheet" href="{{ asset('css/alone.css') }}" />
+    <link  rel="stylesheet" href="{{ asset('css/new.css') }}" />
+    
     
 
     {# Main Stylesheets #}
@@ -80,43 +81,47 @@
 
 
 {% block body %}
-    <a href="{{ path('app_evenement_index') }}">back to list</a>    
-    <h1>{{ evenement.nomEvent }}</h1>
+    <div class="event-details-container">
+        <a href="{{ path('app_evenement_index') }}" class="back-link">← Back to Event List </a>   
+        <h1>{{ evenement.nomEvent }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ evenement.id }}</td>
-            </tr>
-            <tr>
-                <th>NomEvent</th>
-                <td>{{ evenement.nomEvent }}</td>
-            </tr>
-            <tr>
-                <th>DateDebut</th>
-                <td>{{ evenement.dateDebut ? evenement.dateDebut|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>DateFin</th>
-                <td>{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ evenement.type }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ evenement.description }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="event-details-card">
+            <div class="details-item">
+                {#<span class="details-label">Id:</span>#}
+                {#<span class="details-value">{{ evenement.id }}</span>#}
+            </div>
+            <div class="details-item">
+                <span class="details-label">NomEvent:</span>
+                <span class="details-value">{{ evenement.nomEvent }}</span>
+            </div>
+            <div class="details-item">
+                <span class="details-label">DateDebut:</span>
+                <span class="details-value">{{ evenement.dateDebut ? evenement.dateDebut|date('Y-m-d') : '' }}</span>
+            </div>
+            <div class="details-item">
+                <span class="details-label">DateFin:</span>
+                <span class="details-value">{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</span>
+            </div>
+            <div class="details-item">
+                <span class="details-label">Type:</span>
+                <span class="details-value">{{ evenement.type }}</span>
+            </div>
+            <div class="details-item">
+                <span class="details-label">Description:</span>
+                <span class="details-value">{{ evenement.description }}</span>
+            </div>
 
-    
+            {#<div class="participate-button">
+                <a href="" class="button">Participer</a>
+            </div>#}
+        </div>
 
-    {#<a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>#}
+        <!-- Your edit and delete options can be added here -->
 
-    {#{{ include('evenement/_delete_form.html.twig') }}#}
+        
+
+    </div>
 
     {{ include('footer.html.twig') }}
 {% endblock %}
+

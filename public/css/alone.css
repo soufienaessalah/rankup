@@ -38,3 +38,10 @@
     color: white;
 }
 
+.search-container {
+    margin-bottom: 20px;
+}
+
+#search-input {
+    width: 50%;
+}
