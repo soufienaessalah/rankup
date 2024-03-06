@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['username'], message: 'This username is already taken')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -37,6 +38,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $lastname = null;
 
+
+    #[ORM\Column(nullable: true)]
+    private ?string $resetToken = null;
+
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Please enter a username')]
     #[Assert\Length(
@@ -50,8 +55,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\Column]
-    private ?string $password = null;
+    #[ORM\Column(nullable: true)]
+    private ?string $password = '';
 
     #[ORM\Column(nullable: true)]
     private ?string $photo = null;
@@ -69,8 +74,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?string $whyBlocked = null;
 
-    #[ORM\Column(type: 'boolean')]
-    private bool $status = false; // Initialized to false by default
+    #[ORM\Column(nullable: true)]
+    private string $status = 'active'; // Initialized to 'active' by default 
 
     #[ORM\Column(type:"json", nullable:true)]
     private ?array $elo = null;
@@ -155,7 +160,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPassword(): string
     {
-        return $this->password;
+        return $this->password ?? '';
     }
 
     public function setPassword(string $password): static
@@ -213,18 +218,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isStatus(): bool
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(bool $status): static
+    public function setStatus(?string $status): static
     {
         $this->status = $status;
 
         return $this;
     }
-
     public function getElo(): ?array
     {
         return $this->elo;
@@ -274,5 +278,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
+    }
+    
+
+    /**
+     * Get the value of resetToken
+     */ 
+    public function getResetToken()
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * Set the value of resetToken
+     *
+     * @return  self
+     */ 
+    public function setResetToken($resetToken)
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
     }
 }

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les Leçons{% endblock %}
+
+{% block body %}
+
+
+
+<!-- Page top section -->
+<section class="page-top-section set-bg" data-setbg="img/page-top-bg/lecon.jpg">
+    <div class="page-info">
+        <h2 style="color: #3498db;">Toutes les Leçons</h2>
+        <div class="site-breadcrumb">
+            <a href="/f" style="color: #27ae60; border: 1px solid #27ae60; padding: 5px 10px; border-radius: 3px;">Accueil</a> /
+            <span style="color: #27ae60;">Toutes les Leçons</span>
+        </div>
+    </div>
+</section>
+<!-- Page top end-->
+
+<!-- Main Content -->
+<div class="container mt-5">
+    <h2 class="text-center mb-3" style="color: #2c3e50;">Toutes les Leçons</h2>
+
+    <div class="row justify-content-between">
+        <div class="col-md-6 mb-4">
+            <input id="search-input" type="text" class="form-control" placeholder="Rechercher..." style="background-color: #ecf0f1; color: #34495e;">
+        </div>
+        <div class="col-md-6 text-right">
+            <div class="pagination">
+                {{ knp_pagination_render(lecon) }}
+            </div>
+        </div>
+    </div>
+
+    {% if lecon is not empty %}
+        <div class="lecon-list">
+            {% for lecon in lecon %}
+                <div class="card mb-4" style="border: 1px solid #dcdde1; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <div class="card-body">
+                        {{ include('lecon/_details.html.twig', {'lecon': lecon}) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center" style="color: #7f8c8d;">Aucune leçon disponible.</p>
+    {% endif %}
+</div>
+
+<!-- Script pour la recherche AJAX -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#search-input").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".lecon-list .card").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>
+
+ {{include ('header.html.twig')}}
+    {{include ('hero.html.twig')}}
+     {{include ('main.html.twig')}}
+     {{include ('footer.html.twig')}}
+
+
+</div>
+{% endblock %}

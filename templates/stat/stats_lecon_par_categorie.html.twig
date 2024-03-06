@@ -1,0 +1,33 @@
+
+{% block title %}Statistiques des Leçons{% endblock %}
+
+{% block stylesheets %}
+    <!-- Ajoutez les liens vers les fichiers CSS nécessaires ici -->
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1>Statistiques des Leçons</h1>
+        <canvas id="lecons" width="400" height="100"></canvas>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script>
+        let lecons = document.querySelector("#lecons");
+        let leconGraph = new Chart(lecons, {
+            type: "bar", // Utilisez le type de graphique que vous préférez (bar, pie, etc.)
+            data: {
+                labels: {{ leconNames|raw }},
+                datasets: [{
+                    label: "Prix des Leçons",
+                    data: {{ leconCount|raw }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Couleur de fond
+                    borderColor: 'rgba(75, 192, 192, 1)', // Couleur de la bordure
+                    borderWidth: 1, // Largeur de la bordure
+                }]
+            }
+        });
+    </script>
+{% endblock %}
