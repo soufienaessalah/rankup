@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Security;
-use App\Repository\UserRepository;
 
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,32 +14,20 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 class AppCustomAuthAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
-    private AuthorizationCheckerInterface $authorizationChecker;
+
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(
-        private UrlGeneratorInterface $urlGenerator,
-        AuthorizationCheckerInterface $authorizationChecker,UserRepository $userRepository
-    ) {
-        $this->authorizationChecker = $authorizationChecker;
-        $this->userRepository = $userRepository;
+    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    {
     }
 
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
-        // Retrieve the user from the database based on the provided email address
-        $user = $this->userRepository->findOneByEmail($email);
-
-           // Check if the user is blocked
-           if ($user->getStatus() === 'blocked') {
-            throw new CustomUserMessageAuthenticationException('Your account has been blocked.');
-        }
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
@@ -55,13 +41,6 @@ class AppCustomAuthAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // Check if the user has ROLE_ADMIN
-        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            // Redirect to the admin page
-            return new RedirectResponse($this->urlGenerator->generate('admin')); // Change 'admin_dashboard' to your actual route name
-        }
-
-        // If not an admin, proceed with default behavior
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }

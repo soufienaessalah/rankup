@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TTTController extends AbstractController
 {
-    #[Route('/t', name: 'app_t_t_t')]
+    #[Route('/ta', name: 'app_t_t_t')]
     public function index(): Response
     {
         return $this->render('t.html.twig', [
