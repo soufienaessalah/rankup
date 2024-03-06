@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Security;
+use App\Repository\UserRepository;
+
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +16,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 class AppCustomAuthAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -23,14 +26,22 @@ class AppCustomAuthAuthenticator extends AbstractLoginFormAuthenticator
 
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,UserRepository $userRepository
     ) {
         $this->authorizationChecker = $authorizationChecker;
+        $this->userRepository = $userRepository;
     }
 
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
+        // Retrieve the user from the database based on the provided email address
+        $user = $this->userRepository->findOneByEmail($email);
+
+           // Check if the user is blocked
+           if ($user->getStatus() === 'blocked') {
+            throw new CustomUserMessageAuthenticationException('Your account has been blocked.');
+        }
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 

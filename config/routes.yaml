@@ -1,4 +1,28 @@
+
 #index:
+  # path: /
+  #  controller: App\Controller\DefaultController::index
+
+
+generate_pdf:
+    path: /subscription/plan/{id}/generate-pdf
+    controller: App\Controller\ChooseSubscriptionController::generatePdf
+    methods: GET
+
+
+app_payment_process:
+    path: /payment/process
+    controller: App\Controller\PaymentController::process
+    methods: [POST]
+=======
+Lecon:
+    path: /Lecon
+    controller: 'App\Controller\LeconController::index'
+Categorie:
+    path: /Categorie
+    controller: 'App\Controller\CategorieController::index'
+
+    #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
 

@@ -21,8 +21,8 @@ class UserType extends AbstractType
             ->add('status', ChoiceType::class, [
                 'label' => 'Status',
                 'choices' => [
-                    'Active' => false,
-                    'Blocked' => true,
+                    'Active' => 'active',
+                    'Blocked' => 'blocked',
                 ],
                 'expanded' => true, // Render as radio buttons
                 'multiple' => false, // Allow only one selection

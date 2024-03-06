@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,6 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
@@ -22,6 +24,12 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        // Check if the user is blocked
+        $user = $this->getUser();
+        if ($user && $user->getStatus() == 'blocked') {
+            throw new CustomUserMessageAuthenticationException('Your account has been blocked.');
+        }
+
 
 
 
@@ -32,6 +40,15 @@ class SecurityController extends AbstractController
 
     #[Route('/admin', name: 'admin')]
     public function index1(): Response
+    {     $userRepository = $this->getDoctrine()->getRepository(User::class);
+        $users = $userRepository->findAll();
+        return $this->render('security/back.html.twig', [
+            'controller_name' => 'SecurityController',
+                'user' => $this->getUser(),'users' => $users,
+        ]);
+    }
+    #[Route('/user', name: 'user')]
+    public function index11(): Response
     {     $userRepository = $this->getDoctrine()->getRepository(User::class);
         $users = $userRepository->findAll();
         return $this->render('security/admin.html.twig', [
@@ -75,4 +92,16 @@ class SecurityController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-}
+    #[Route('/user/{id}/show', name: 'adminviewuser')]
+    public function view(Request $request, $id): Response 
+    {
+        $userRepository = $this->getDoctrine()->getRepository(User::class);
+        $user = $userRepository->find($id); // Replace $userRepository with your actual repository
+    
+        return $this->render('security/moredetails.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    }
+
