@@ -1,20 +1,10 @@
-reclamation:
-    path: /Reclamation
-    controller: 'App\Controller\ReclamationController::index'
+Lecon:
+    path: /Lecon
+    controller: 'App\Controller\LeconController::index'
+Categorie:
+    path: /Categorie
+    controller: 'App\Controller\CategorieController::index'
 
-suivi_reclamation:
-    path: /SuiviReclamation
-    controller: 'App\Controller\SuiviReclamationController::index'
-
-t:
-    path: /t
-    controller: 'App\Controller\TTTController::index'
-
-back:  # Ensure proper alignment with other routes
-    path: /back
-    controller: 'App\Controller\BackController::index'
-
-app_suivi_reclamation_order_by_date:
-    path: '/orderByDate'
-    controller: 'App\Controller\SuiviReclamationController::orderByDate'
-    methods: ['GET']
+    #index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
