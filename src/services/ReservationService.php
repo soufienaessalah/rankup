@@ -1,5 +1,4 @@
-// src/Service/ReservationService.php
-
+<?php
 namespace App\Service;
 
 use App\Entity\Reservation;
@@ -28,5 +27,23 @@ class ReservationService
         $this->entityManager->flush();
 
         return $reservation;
+    }
+
+    public function deleteReservation(Reservation $reservation): void
+    {
+        // Delete the reservation from the database
+        $this->entityManager->remove($reservation);
+        $this->entityManager->flush();
+    }
+
+    public function updateReservation(Reservation $reservation, \DateTimeInterface $date, ?string $description, SubscriptionPlan $subscriptionPlan): void
+    {
+        // Update the reservation with new data
+        $reservation->setDate($date);
+        $reservation->setDescription($description);
+        $reservation->setSubscriptionPlan($subscriptionPlan);
+
+        // Persist the updated reservation to the database
+        $this->entityManager->flush();
     }
 }

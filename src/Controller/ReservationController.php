@@ -5,18 +5,21 @@ namespace App\Controller;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Service\ReservationService;
+use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 #[Route('/reservation')]
 class ReservationController extends AbstractController
 {
     #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
-    public function index(): Response
+    public function index(ReservationRepository $reservationRepository): Response
     {
-        $reservations = $this->getDoctrine()->getRepository(Reservation::class)->findAll();
+        $reservations = $reservationRepository->findAll();
 
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservations,
@@ -28,6 +31,7 @@ class ReservationController extends AbstractController
     {
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,8 +62,9 @@ class ReservationController extends AbstractController
     public function edit(Request $request, Reservation $reservation, ReservationService $reservationService): Response
     {
         $form = $this->createForm(ReservationType::class, $reservation);
+    
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationService->updateReservation(
                 $reservation,
@@ -67,10 +72,10 @@ class ReservationController extends AbstractController
                 $reservation->getDescription(),
                 $reservation->getSubscriptionPlan()
             );
-
-            return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
+    
+            return $this->redirectToRoute('app_reservation_index'); // Redirect to index page after successful update
         }
-
+    
         return $this->renderForm('reservation/edit.html.twig', [
             'reservation' => $reservation,
             'form' => $form,

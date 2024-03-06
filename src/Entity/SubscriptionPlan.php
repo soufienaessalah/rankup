@@ -17,12 +17,12 @@ class SubscriptionPlan
     #[ORM\Column]
     private ?int $id = null;
 
-
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le type du plan d'abonnement est obligatoire.")]
     #[Assert\Length(
         max: 255,
-        maxMessage: "Le type du plan d'abonnement ne peut pas dépasser {{ limit }} caractères." )]
+        maxMessage: "Le type du plan d'abonnement ne peut pas dépasser {{ limit }} caractères."
+    )]
     private ?string $Type = null;
 
     #[ORM\Column]
@@ -39,16 +39,13 @@ class SubscriptionPlan
     )]
     private ?string $additionalInfo = null;
 
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: "subscriptionPlan")]
+    private Collection $reservations;
 
-
- #[ORM\OneToMany(targetEntity:Reservation::class, mappedBy:"subscriptionPlan")]
- 
-private Collection $reservations;
-
-public function __construct()
-{
-    $this->reservations = new ArrayCollection();
-}
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,4 +88,33 @@ public function __construct()
         return $this;
     }
 
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setSubscriptionPlan($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getSubscriptionPlan() === $this) {
+                $reservation->setSubscriptionPlan(null);
+            }
+        }
+
+        return $this;
+    }
 }

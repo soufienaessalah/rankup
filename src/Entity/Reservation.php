@@ -14,23 +14,20 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $Date = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Description = null;
 
-     
-     #[ORM\ManyToOne(targetEntity:SubscriptionPlan::class)]
-     #[ORM\JoinColumn(nullable: false)]     
+    #[ORM\ManyToOne(targetEntity: SubscriptionPlan::class)]
+    #[ORM\JoinColumn(name: "subscription_plan_id", referencedColumnName: "id", nullable: false)]
     private ?SubscriptionPlan $subscriptionPlan = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
 
     public function getDate(): ?\DateTimeInterface
     {
@@ -52,6 +49,18 @@ class Reservation
     public function setDescription(?string $Description): static
     {
         $this->Description = $Description;
+
+        return $this;
+    }
+
+    public function getSubscriptionPlan(): ?SubscriptionPlan
+    {
+        return $this->subscriptionPlan;
+    }
+
+    public function setSubscriptionPlan(?SubscriptionPlan $subscriptionPlan): static
+    {
+        $this->subscriptionPlan = $subscriptionPlan;
 
         return $this;
     }
