@@ -1,0 +1,11 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}New MatchEntity{% endblock %}
+
+{% block body %}
+    <h1>Create new MatchEntity</h1>
+
+    {{ include('match_entity/_form.html.twig') }}
+
+    <a href="{{ path('app_match_entity_index') }}">back to list</a>
+{% endblock %}
