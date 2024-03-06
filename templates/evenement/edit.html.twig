@@ -8,7 +8,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-
     <title>{% block title %}SB Admin 2 - Dashboard{% endblock %}</title>
 
     {% block stylesheets %}
@@ -20,20 +19,9 @@
 
         <!-- Custom styles for this template-->
         <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
-
-
-    <title>{% block title %}My Dynamic Title{% endblock %}</title>
-
-    {% block stylesheets %}
-        <!-- Custom fonts for this template -->
-        <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-        <!-- Custom styles for this template -->
-        <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
-        <!-- FullCalendar CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
-
+        <!-- Add these links to the head section -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyVqO9lC6oNlDOU5fBAeaaqd1d60bnpjTl" crossorigin="anonymous">
+       
 
     {% endblock %}
 </head>
@@ -46,7 +34,6 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
@@ -55,19 +42,6 @@
                     <i class="fas fa-laugh-wink"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-
-
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar content -->
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/o">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2 / Home Page</sup></div>
-
-
             </a>
 
             <!-- Divider -->
@@ -75,22 +49,9 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
-
-
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-
-                <a class="nav-link" href="{{ path('app_lecon_index') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-
-
             </li>
 
             <!-- Divider -->
@@ -115,28 +76,14 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-
                     <span>Event & Sponsor</span>
-=======
-
-                    <span>Subscription & Reservation</span>
-
-                    <span>Components</span>
-
-
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
                         <h6 class="collapse-header">ADD:</h6>
                         <a class="collapse-item" href="{{ path('app_evenement_new') }}">Add Event</a>
                         <a class="collapse-item" href="{{ path('app_sponsor_new') }}">Add sponsor</a>
-
-
-                        <a class="collapse-item" href="{{ path('app_subscription_plan_index') }}">Manage Subscrition Plans</a>
-                        <a class="collapse-item" href="{{ path('app_reservation_index') }}">Manage Reservations</a>
-
                     </div>
                 </div>
                 
@@ -166,31 +113,6 @@
                         <a class="collapse-item" href="utilities-border.html">Borders</a>
                     </div>
                 </div>
-
-
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="{{ path('app_lecon_index') }}">
-                            <i class="fas fa-book"></i> Leçon
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_categorie_index') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Catégorie</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Leçon -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_lecon_index') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Leçon</span>
-                </a>
-
-
             </li>
 
             <!-- Divider -->
@@ -223,38 +145,18 @@
                 </div>
             </li>
 
-
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-
-
-            <!-- Stat link with icon -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('stats_lecon_par_categorie') }}">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Stat</span>
-                </a>
-
-
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
-
                     <span>Tables</span></a>
-=======
-
-                    <span>Tables</span></a>
-
-                    <span>Tables</span>
-                </a>
-
-
             </li>
 
             <!-- Divider -->
@@ -476,73 +378,56 @@
                 </nav>
                 <!-- End of Topbar -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+<div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <div class="card border-0 shadow-lg my-5">
+        <div class="card-header bg-dark text-white">
+            <h1 class="h3 mb-0">Edit Evenement</h1>
+        </div>
+        <div class="card-body">
 
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-=======
+            <!-- Your form content here -->
+            {{ include('evenement/_form.html.twig', {'button_label': 'Update'}) }}
 
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-=======
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                        </a>
+            <!-- Back to List button -->
+            <a href="{{ path('app_evenement_affichageA') }}" class="btn btn-secondary mt-3">Back to List</a>
 
+        </div>
+    </div>
 
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Earnings (Monthly)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ... d'autres éléments de la page ... -->
-
-                    </div>
-
-
-                    <!-- Calendar Section -->
-                    <div class="row">
-                        <div class="col-lg-12 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div id="calendar"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+</div>
+<!-- End of Main Content -->
 
 
 
-                </div>
-                <!-- /.container-fluid -->
 
-            </div>
-            <!-- End of Main Content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -579,22 +464,13 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-
                     <a class="btn btn-primary" href="login.html">Logout</a>
-=======
-
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-
-                    
-
-
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -611,34 +487,12 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-    <!-- FullCalendar JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-            // Initialize FullCalendar
-            $('#calendar').fullCalendar({
-                // Your FullCalendar configuration options here
-            });
-        });
-    </script>
-
-
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-ZVRUA1Iq07XbG4FZd+drDdT4jZalFltCZrCcGFD8PZXId9bp3tu1faXfPL5X7nxj" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyVqO9lC6oNlDOU5fBAeaaqd1d60bnpjTl" crossorigin="anonymous"></script>
 {% endblock %}
 </body>
 
 </html>
+
