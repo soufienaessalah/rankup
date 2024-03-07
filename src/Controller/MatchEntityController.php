@@ -86,13 +86,4 @@ class MatchEntityController extends AbstractController
 
         return $this->redirectToRoute('app_match_entity_index', [], Response::HTTP_SEE_OTHER);
     }
-
-    #[Route('/map', name: 'app_match_entity_map')]
-    public function map(MatchEntityRepository $matchEntityRepository): Response
-    {
-        return $this->render('match_entity/map.html.twig', [
-            'match_entities' => 'test',
-        ]);
-    }
 }
-

@@ -1,0 +1,193 @@
+<head>
+    <title>Subscription Plans</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="EndGam Gaming Magazine Template">
+    <meta name="keywords" content="endGam, gaming, magazine, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {# Favicon #}
+    <link href="{{ asset('img/favicon.ico') }}" rel="shortcut icon"/>
+
+    {# Google Font #}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    {# Stylesheets #}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}"/>
+
+    {# Main Stylesheets #}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+        
+    <![endif]-->
+    
+
+</head>
+
+
+<!-- Header section -->
+	<header class="">
+		<div class="">
+			<div class="header-social d-flex justify-content-end" style="color: black;">
+    <p style="color: black;">Follow us:</p>
+    <a href="#" style="color: black;"><i class="fa fa-pinterest" style="color: black;"></i></a>
+    <a href="#" style="color: black;"><i class="fa fa-facebook" style="color: black;"></i></a>
+    <a href="#" style="color: black;"><i class="fa fa-twitter" style="color: black;"></i></a>
+    <a href="#" style="color: black;"><i class="fa fa-dribbble" style="color: black;"></i></a>
+    <a href="#" style="color: black;"><i class="fa fa-behance" style="color: black;"></i></a>
+</div>
+
+			<div class="header-bar-warp d-flex">
+				<!-- site logo -->
+				<a href="home.html" class="site-logo">
+					<img src="./img/logo.png" alt="">
+				</a>
+				<nav class="top-nav-area w-100">
+					
+{# Check if the user is logged in #}
+				<div class="user-panel">
+					{% if app.user %}
+					 <a href="/show">Profile</a> / <a href="{{ path('app_logout') }}">Log out</a>
+    					
+						{% else %}
+						<a href="/login">Login</a> / <a href="/register">Register</a>
+						{% endif %}
+					</div>
+					<!-- Menu -->
+					{% if app.user %}
+					 {% if 'ROLE_PLAYER' in app.user.roles %}
+					<ul class="main-menu primary-menu">
+						<li><a href="{{ path('app_choose_subscription') }}">Subscription</a></li>
+						<li><a href="{{ path('all_lecons') }}">Courses</a>
+							<ul class="sub-menu">
+								<li><a href="{{ path('app_choose_subscription') }}">Game Singel</a></li>
+							</ul>
+						</li>
+						<li><a href="{{ path('app_evenement_index') }}">Events</a></li>
+						<li><a href="{{ path('app_equipe_new') }}">Teams</a></li>
+						<li><a href="{{ path('app_reclamation_new') }}">Reclamation</a></li>
+						<li><a href="{{path('app_reservation_new')}}">Reservation</a></li>
+					</ul>
+					{% elseif 'ROLE_COACH' in app.user.roles %}
+					<ul class="main-menu primary-menu">
+					<li><a href="{{ path('app_lecon_new') }}">Courses</a></li>
+					<li><a href="{{ path('app_reclamation_new') }}">Reclamation</a></li>
+					<li><a href="{{path('app_reservation_new')}}">Reservation</a></li>
+					</ul>
+					{% endif %}
+					{% endif %}
+				</nav>
+			</div>
+		</div>
+
+
+        
+	</header>
+	<!-- Header section end -->
+
+
+{% block body %}
+<style>
+    .plans-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around; /* Adjust this as needed to center/match your design */
+        max-width: 800px; /* Adjust based on your preference */
+        margin: auto;
+    }
+
+    .subscription-plan {
+        width: 300px;
+        height: 200px;
+        border: 1px solid #ccc;
+        margin: 20px;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box; /* Ensures padding & border are included in the width/height */
+    }
+
+    .btn-purple {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: purple;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-purple:hover {
+        background-color: #6a0dad; /* Darken the color slightly on hover */
+    }
+
+      .subscription-title {
+        text-align: center;
+        font-size: 24px; /* Smaller size */
+        color: #333; /* Dark grey color */
+        margin-bottom: 0.5em; /* Space below the title */
+    }
+
+      .title {
+            text-align: center;
+            font-size: 20px; /* Smaller font size */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #333; /* Optional: Adjust color if needed */
+        }
+
+</style>
+
+    
+
+<h1 class="title">Choose Subscription Plan</h1>
+
+<div class="search-container">
+        <label for="search-input" class="sr-only">Search Plans</label>
+        <input id="search-input" class="form-control" type="text" placeholder="Search Events..." style="width: 30%; padding: 10px; margin:13px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+    </div>
+
+
+
+<div class="plans-container">
+    {% for plan in subscriptionPlans %}
+        <div class="subscription-plan">
+            <h2>{{ plan.getType() }}</h2>
+            <p><strong>Price:</strong> ${{ plan.getPrix() }}</p>
+            <p>{{ plan.getAdditionalInfo() }}</p>
+            <a href="{{ path('app_choose_subscription_details', {'id': plan.getId()}) }}" class="btn btn-purple">Select Plan</a>
+        </div>
+    {% endfor %}
+</div>
+       
+
+
+
+{{include ('footer.html.twig')}}
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Ensure jQuery is included before this script -->
+
+<script>
+    $(document).ready(function() {
+        $("#search-input").on("input", function() {
+            var value = $(this).val().toLowerCase();
+            $(".subscription-plan").each(function() {
+                var planType = $(this).find("h2").text().toLowerCase();
+                if (planType.includes(value)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>

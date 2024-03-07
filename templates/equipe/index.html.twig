@@ -1,4 +1,4 @@
-{% extends 'back/base.html.twig' %}
+{% extends 'basecom.html.twig' %}
 
 {% block title %}Equipe index{% endblock %}
 
@@ -7,6 +7,7 @@
 
     {# <p>Fusce erat dui, venenatis et erat in, vulputate dignissim lacus. Donec vitae tempus dolor,<br>sit amet elementum lorem. Ut cursus tempor turpis.</p>     #}
 
+    <a href="{{ path('show_match_map') }}" class="btn btn-primary">Current match location</a>
     <table class="table">
         <thead>
             <tr>

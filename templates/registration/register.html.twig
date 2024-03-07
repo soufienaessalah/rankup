@@ -1,19 +1,90 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/stylelogin.css') }}"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-{% block title %}Register{% endblock %}
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="container">
+    <input type="checkbox" id="flip">
+    <div class="cover">
+        <div class="front">
+            <img src="img/01.PNG" alt="">
+        </div>
+        <div class="back">
+            <img class="backImg" src="img/01.PNG" alt="">
+        </div>
+    </div>
+       <div class="forms">
+        <div class="form-content">
+            <div class="login-form">
+                <div class="title">Sign Up</div>
+                {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                <div class="input-boxes">
+                    <div class="input-box">
+                        
+                        <div class="input">{{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Enter your email'}}) }}</div>
+                        <div class="">{{ form_errors(registrationForm.email) }}</div> 
+                    </div>
+                       <div class="input-box">
+                       
+                        <div class="input">{{ form_widget(registrationForm.username, {'attr': {'placeholder': 'Enter your username'}}) }}</div>
+                            <div class="">{{ form_errors(registrationForm.username) }}</div> 
+                    </div>
+                      <div class="input-box">
+                        
+                        <div class="input">{{ form_widget(registrationForm.plainPassword.first,{'attr': {'placeholder': 'Enter your password'}}) }}</div>
+                        <div class="">{{ form_errors(registrationForm.plainPassword.first) }}</div> 
+                        
+                    </div>
+                    <div class="input-box">
+                        
+                        <div class="input">{{ form_widget(registrationForm.plainPassword.second,{'attr': {'placeholder': 'Confirm your password'}}) }}</div>
+                        <div class="">{{ form_errors(registrationForm.plainPassword.second) }}</div> 
+                    </div>
+                    <div class="input1">
+                       <div class="label">{{ form_label(registrationForm.roles) }}</div>
+                        <div class="input">{{ form_widget(registrationForm.roles) }}</div>
+                    </div>
+                    <div class="input1">
+                        
+                        <div class="input">
+                          
+                        <div class="input">{{ form_widget(registrationForm.captcha) }}</div>
+                         <div class="">{{ form_errors(registrationForm.captcha) }}</div> 
+                        </div>
+                    </div>
+                </div>
+                 
+                <div class="button input-box">
+                    <input type="submit" value="Submit" class="btn btn-lg btn-primary">
+                </div>
+                {{ form_end(registrationForm) }}
+                <a href="{{ path('connect_google') }}">
+    <img src="{{ asset('img/g.jpg') }}" >
+    
+</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    {{ form_errors(registrationForm) }}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var coachCheckbox = document.getElementById('registration_form_roles_0');
+        var joueurCheckbox = document.getElementById('registration_form_roles_1');
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        coachCheckbox.addEventListener('change', function() {
+            if (coachCheckbox.checked) {
+                joueurCheckbox.checked = false;
+            }
+        });
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        joueurCheckbox.addEventListener('change', function() {
+            if (joueurCheckbox.checked) {
+                coachCheckbox.checked = false;
+            }
+        });
+    });
+</script>
 {% endblock %}
